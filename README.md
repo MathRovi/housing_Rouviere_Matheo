@@ -16,12 +16,15 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 ## 1. Cloner le projet
 
 Clonez le projet depuis GitHub :
+
 git clone https://github.com/MathRovi/housing_Rouviere_Matheo.git
+
 cd housing_Rouviere_Matheo
 
 ## Dans le dossier housing-model, créez un environnement virtuel pour installer les dépendances
 
 cd housing-model
+
 python -m venv venv
 
 ## 2. Ensuite, activez l'environnement virtuel:
@@ -44,6 +47,7 @@ Cela génère le modèle et le sauvegarde dans le fichier model/model.pkl.
 Allez dans le dossier housing-api et démarrez le serveur FastAPI avec la commande suivante :
 
 cd housing-api
+
 uvicorn main:app --reload
 
 Cela démarre le serveur API à l'adresse http://localhost:8000.

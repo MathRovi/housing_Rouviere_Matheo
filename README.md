@@ -43,10 +43,11 @@ pip install -r requirements.txt
 
 python train_model.py
 
-## Cela génère le modèle et le sauvegarde dans le fichier model/model.pkl.
+Cela génère le modèle et le sauvegarde dans le fichier model/model.pkl.
 
 # Démarrer le projet
-# 1. Démarrer l'API avec FastAPI
+
+1. Démarrer l'API avec FastAPI
 ## Allez dans le dossier housing-api et démarrez le serveur FastAPI avec la commande suivante :
 
 cd housing-api

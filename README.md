@@ -52,3 +52,16 @@ uvicorn main:app --reload
 
 Cela démarre le serveur API à l'adresse http://localhost:8000.
 
+## 2. Démarrer le projet avec Docker
+
+Si vous souhaitez exécuter le projet avec Docker, vous pouvez utiliser docker-compose.
+
+Construire les images Docker :
+
+docker-compose build
+
+## Démarrer les containers :
+
+docker-compose up
+
+Les services seront en cours d'exécution dans les containers Docker. L'API sera accessible via http://localhost:8000.

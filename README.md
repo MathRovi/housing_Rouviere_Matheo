@@ -15,8 +15,6 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 
 1. Cloner le projet
 Clonez le projet depuis GitHub :
-
-```bash
 git clone https://github.com/MathRovi/housing_Rouviere_Matheo.git
 cd housing_Rouviere_Matheo
 

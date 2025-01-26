@@ -13,7 +13,7 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 
 ## Installation
 
-### 1. Cloner le projet
+1. Cloner le projet
 Clonez le projet depuis GitHub :
 
 ```bash
@@ -29,7 +29,7 @@ Ensuite, activez l'environnement virtuel:
 venv\scripts\activate (pour windows)
 source venv/bin/activate (pour linux, macOS)
 
-### 3. Installer les dépendances
+3. Installer les dépendances
 Installez les dépendances nécessaires avec la commande suivante :
 
 pip install -r requirements.txt

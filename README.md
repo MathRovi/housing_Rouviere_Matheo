@@ -13,7 +13,7 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 
 ## Installation
 
-1. Cloner le projet
+## 1. Cloner le projet
 
 Clonez le projet depuis GitHub :
 git clone https://github.com/MathRovi/housing_Rouviere_Matheo.git
@@ -24,11 +24,27 @@ cd housing_Rouviere_Matheo
 cd housing-model
 python -m venv venv
 
-## Ensuite, activez l'environnement virtuel:
+## 2. Ensuite, activez l'environnement virtuel:
 venv\scripts\activate (pour windows)
 source venv/bin/activate (pour linux, macOS)
 
 ## 3. Installer les dépendances
 Installez les dépendances nécessaires avec la commande suivante :
 pip install -r requirements.txt
+
+## 4. Entraîner le modèle
+Dans le dossier housing-model, exécutez le script Python pour entraîner le modèle de régression linéaire :
+
+python train_model.py
+
+Cela génère le modèle et le sauvegarde dans le fichier model/model.pkl.
+
+## Démarrer le projet
+## 1. Démarrer l'API avec FastAPI
+Allez dans le dossier housing-api et démarrez le serveur FastAPI avec la commande suivante :
+
+cd housing-api
+uvicorn main:app --reload
+
+Cela démarre le serveur API à l'adresse http://localhost:8000.
 

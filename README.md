@@ -14,21 +14,21 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 ## Installation
 
 1. Cloner le projet
+
 Clonez le projet depuis GitHub :
 git clone https://github.com/MathRovi/housing_Rouviere_Matheo.git
 cd housing_Rouviere_Matheo
 
-Dans le dossier housing-model, créez un environnement virtuel pour installer les dépendances
+## Dans le dossier housing-model, créez un environnement virtuel pour installer les dépendances
 
 cd housing-model
 python -m venv venv
 
-Ensuite, activez l'environnement virtuel:
+## Ensuite, activez l'environnement virtuel:
 venv\scripts\activate (pour windows)
 source venv/bin/activate (pour linux, macOS)
 
-3. Installer les dépendances
+## 3. Installer les dépendances
 Installez les dépendances nécessaires avec la commande suivante :
-
 pip install -r requirements.txt
 

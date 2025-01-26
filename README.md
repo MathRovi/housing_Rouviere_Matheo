@@ -1,80 +1,80 @@
 # Housing Prediction API - Projet de Matheo Rouvière
 
-## Description
+# Description
 Ce projet implémente une API permettant de prédire la valeur médiane des maisons en fonction de diverses caractéristiques comme la localisation géographique, l'âge des maisons, le nombre de chambres, le revenu médian, etc. Le modèle utilisé pour faire ces prédictions est un modèle de régression linéaire, entraîné sur un jeu de données de logements. L'API est développée avec **FastAPI** et le modèle est créé avec **scikit-learn**.
 
-## Prérequis
+# Prérequis
 
-# Avant de commencer, assurez-vous d'avoir les outils suivants installés :
+## Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 
 - **Python 3.11.9**
 - **Docker** 
 - **Git**
 
-## Installation
+# Installation
 
-## 1. Cloner le projet
+# 1. Cloner le projet
 
-# Clonez le projet depuis GitHub :
+## Clonez le projet depuis GitHub :
 
 git clone https://github.com/MathRovi/housing_Rouviere_Matheo.git
 
 cd housing_Rouviere_Matheo
 
-## Dans le dossier housing-model, créez un environnement virtuel pour installer les dépendances
+# Dans le dossier housing-model, créez un environnement virtuel pour installer les dépendances
 
 cd housing-model
 
 python -m venv venv
 
-## 2. Ensuite, activez l'environnement virtuel:
+# 2. Ensuite, activez l'environnement virtuel:
 
 venv\scripts\activate (pour windows)
 
 source venv/bin/activate (pour linux, macOS)
 
-## 3. Installer les dépendances
-# Installez les dépendances nécessaires avec la commande suivante :
+# 3. Installer les dépendances
+## Installez les dépendances nécessaires avec la commande suivante :
 
 pip install -r requirements.txt
 
-## 4. Entraîner le modèle
-# Dans le dossier housing-model, exécutez le script Python pour entraîner le modèle de régression linéaire :
+# 4. Entraîner le modèle
+## Dans le dossier housing-model, exécutez le script Python pour entraîner le modèle de régression linéaire :
 
 python train_model.py
 
-# Cela génère le modèle et le sauvegarde dans le fichier model/model.pkl.
+## Cela génère le modèle et le sauvegarde dans le fichier model/model.pkl.
 
-## Démarrer le projet
-## 1. Démarrer l'API avec FastAPI
-# Allez dans le dossier housing-api et démarrez le serveur FastAPI avec la commande suivante :
+# Démarrer le projet
+# 1. Démarrer l'API avec FastAPI
+## Allez dans le dossier housing-api et démarrez le serveur FastAPI avec la commande suivante :
 
 cd housing-api
 
 uvicorn main:app --reload
 
-# Cela démarre le serveur API à l'adresse http://localhost:8000.
+## Cela démarre le serveur API à l'adresse http://localhost:8000.
 
-## 2. Démarrer le projet avec Docker
+# 2. Démarrer le projet avec Docker
 
-# Si vous souhaitez exécuter le projet avec Docker, vous pouvez utiliser docker-compose.
+## Si vous souhaitez exécuter le projet avec Docker, vous pouvez utiliser docker-compose.
 
-# Construire les images Docker :
+## Construire les images Docker :
 
 docker-compose build
 
-## Démarrer les containers :
+# Démarrer les containers :
 
 docker-compose up
 
-# Les services seront en cours d'exécution dans les containers Docker. L'API sera accessible via http://localhost:8000.
+## Les services seront en cours d'exécution dans les containers Docker. L'API sera accessible via http://localhost:8000.
 
-## Utilisation de l'API
-# L'API expose un endpoint pour prédire la valeur médiane des maisons en fonction de plusieurs paramètres.
+# Utilisation de l'API
+## L'API expose un endpoint pour prédire la valeur médiane des maisons en fonction de plusieurs paramètres.
 
 POST /predict/ : Prédire la valeur médiane des maisons en fonction des paramètres fournis.
 
-# Exemple de données sous le format JSON à envoyer :
+## Exemple de données sous le format JSON à envoyer :
 
 {
   "longitude": -122.23,
@@ -91,7 +91,7 @@ POST /predict/ : Prédire la valeur médiane des maisons en fonction des paramè
   "ocean_proximity_ISLAND": 0
 }
 
-# Réponse attendue :
+## Réponse attendue :
 
 {
   "prediction": 628725.5062235147

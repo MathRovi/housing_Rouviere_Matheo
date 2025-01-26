@@ -97,5 +97,6 @@ POST /predict/ : Prédire la valeur médiane des maisons en fonction des paramè
 {
   "prediction": 628725.5062235147
 }
-Tests
-Des tests unitaires sont intégrés dans le projet pour tester l'API. Vous pouvez utiliser des outils comme Postman ou Swagger UI pour tester les points de terminaison. Swagger UI est accessible à l'adresse http://localhost:8000/docs.
+
+Des tests unitaires sont intégrés dans le projet pour tester l'API. Vous pouvez utiliser des outils Swagger UI pour tester les points de terminaison. 
+Swagger UI est accessible à l'adresse http://localhost:8000/docs.

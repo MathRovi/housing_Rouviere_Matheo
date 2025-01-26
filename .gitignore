@@ -1,0 +1,85 @@
+# Ignorer les fichiers de configuration des IDEs
+.vscode/
+.idea/
+
+# Ignorer les environnements virtuels
+.venv/
+*.env
+*.python-version
+
+# Ignorer les fichiers de log
+*.log
+
+# Ignorer les fichiers compilés Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignorer les fichiers de systèmes d'exploitation et de configuration
+.DS_Store
+Thumbs.db
+
+# Ignorer les fichiers de configuration de Docker
+.docker/
+
+# Ignorer les fichiers d'Anaconda
+.anaconda/
+*.condarc
+conda-meta/
+
+# Ignorer les fichiers de VirtualBox
+*.VirtualBox/
+
+# Ignorer les fichiers temporaires du système et de l'utilisateur
+*.swp
+*.swo
+*~
+Desktop.ini
+
+# Ignorer les dossiers et fichiers personnels
+AppData/
+Contacts/
+Desktop/
+Downloads/
+Favorites/
+Links/
+Music/
+Pictures/
+Saved Games/
+Searches/
+Videos/
+OneDrive/
+Documents/Ma musique/
+Documents/Mes images/
+Documents/Mes vidéos/
+Documents/Mes documents/
+Documents/Menu Démarrer/
+Documents/Modèles/
+Documents/Recent/
+Documents/SendTo/
+Documents/Voisinage d'impression/
+Documents/Voisinage réseau/
+
+# Ignorer d'autres répertoires et fichiers spécifiques
+*.bak
+*.tmp
+
+# Ignorer les dossiers de projets externes (dans votre structure)
+B1/
+CloudEngineering S3/
+CloudEngineering S4/
+Anglais S3/
+Base de données S3/
+Digital Marketing S3/
+Economics2 S3/
+Environnement S3/
+Geopolitics S3/
+Hackathon 2024 S3/
+Machine Learning S3/
+Projet JAVA S4/
+Projet Octobre2024 S3/
+Projet decembre2024 S3/
+Python S3/
+Python S4/
+projet-universite S3/
+Noimportant/

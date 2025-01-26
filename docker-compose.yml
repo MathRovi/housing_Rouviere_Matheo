@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: cloudhousings4-db-1
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: u6x5qhup
+      POSTGRES_DB: housing_db
+    volumes:
+      - cloudhousings4_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      context: ./housing-api
+    container_name: cloudhousings4-api-1
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+
+  model:
+    build:
+      context: ./housing-model
+    container_name: cloudhousings4-model-1
+    restart: always
+    ports:
+      - "8001:8001"
+
+volumes:
+  cloudhousings4_db_data:

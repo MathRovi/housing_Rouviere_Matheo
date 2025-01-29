@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Rouviere/Documents/IA-Institut/B2/CloudhousingS4/housing-model/mlruns/817329415073338012/ef505ee1b5714854a79b4e489b4ad11d/artifacts
+end_time: 1738149521178
+entry_point_name: ''
+experiment_id: '817329415073338012'
+lifecycle_stage: active
+run_id: ef505ee1b5714854a79b4e489b4ad11d
+run_name: silent-vole-806
+run_uuid: ef505ee1b5714854a79b4e489b4ad11d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738149516900
+status: 3
+tags: []
+user_id: Rouviere

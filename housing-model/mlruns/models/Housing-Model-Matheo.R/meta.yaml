@@ -1,0 +1,8 @@
+aliases:
+  champion: '1'
+  production: '1'
+creation_timestamp: 1738148250117
+description: Modèle amélioré de prédiction des prix des maisons, basé sur des données
+  prétraitées et optimisées.
+last_updated_timestamp: 1738149756017
+name: Housing-Model-Matheo.R

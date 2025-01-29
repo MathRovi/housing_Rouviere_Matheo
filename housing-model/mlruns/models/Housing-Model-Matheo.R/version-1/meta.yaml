@@ -1,0 +1,15 @@
+aliases:
+- champion
+creation_timestamp: 1738148250140
+current_stage: Production
+description: ''
+last_updated_timestamp: 1738149489927
+name: Housing-Model-Matheo.R
+run_id: 4f87e29d3e0d4de2bd6b7b7021d1eed2
+run_link: ''
+source: mlflow-artifacts:/334641365789414893/4f87e29d3e0d4de2bd6b7b7021d1eed2/artifacts/model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/334641365789414893/4f87e29d3e0d4de2bd6b7b7021d1eed2/artifacts/model
+user_id: null
+version: 1

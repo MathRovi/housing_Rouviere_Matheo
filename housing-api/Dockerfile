@@ -1,18 +1,28 @@
-# Utiliser une image Python officielle
+# Dockerfile pour housing-api
+
 FROM python:3.11-slim
+
+# Installer les dépendances système nécessaires
+RUN apt-get update && apt-get install -y \
+    gcc \
+    curl \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Définir le répertoire de travail
 WORKDIR /app
 
-# Installer les dépendances système nécessaires
-RUN apt-get update && apt-get install -y libpq-dev && apt-get clean
+# Copier les fichiers nécessaires
+COPY requirements.txt ./
 
-# Copier les fichiers nécessaires dans l'image Docker
-COPY requirements.txt .
+# Installer les dépendances Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier tout le code source dans le conteneur
+# Copier le reste du code
 COPY . .
 
-# Lancer l'application
+# Exposer le port de l'application
+EXPOSE 8000
+
+# Commande pour lancer FastAPI avec Uvicorn
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

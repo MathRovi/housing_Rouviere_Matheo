@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Rouviere/Documents/IA-Institut/B2/CloudhousingS4/housing-model/mlruns/817329415073338012/46bab81da8e54994ac4abd3d6e9762eb/artifacts
+end_time: 1738151187045
+entry_point_name: ''
+experiment_id: '817329415073338012'
+lifecycle_stage: active
+run_id: 46bab81da8e54994ac4abd3d6e9762eb
+run_name: carefree-dog-534
+run_uuid: 46bab81da8e54994ac4abd3d6e9762eb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738151181831
+status: 3
+tags: []
+user_id: Rouviere

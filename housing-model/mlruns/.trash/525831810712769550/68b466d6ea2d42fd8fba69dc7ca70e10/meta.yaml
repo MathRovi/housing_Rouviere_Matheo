@@ -1,0 +1,16 @@
+artifact_uri: file:///C:/Users/Rouviere/Documents/IA-Institut/B2/CloudhousingS4/housing-model/mlruns/525831810712769550/68b466d6ea2d42fd8fba69dc7ca70e10/artifacts
+deleted_time: 1738148361597
+end_time: 1738147984053
+entry_point_name: ''
+experiment_id: '525831810712769550'
+lifecycle_stage: deleted
+run_id: 68b466d6ea2d42fd8fba69dc7ca70e10
+run_name: bedecked-swan-969
+run_uuid: 68b466d6ea2d42fd8fba69dc7ca70e10
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738147963768
+status: 3
+tags: []
+user_id: Rouviere

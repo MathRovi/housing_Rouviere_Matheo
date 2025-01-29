@@ -1,16 +1,18 @@
 from fastapi import FastAPI
 import pickle
 import numpy as np
+import os
 
 # Initialiser l'application FastAPI
 app = FastAPI()
 
 # Charger le modèle entraîné
+model_path = os.path.join(os.getcwd(), "model", "model.pkl")
 try:
-    with open("model/model.pkl", "rb") as f:
+    with open(model_path, "rb") as f:
         model = pickle.load(f)
 except FileNotFoundError:
-    raise Exception("Le fichier 'model/model.pkl' est introuvable. Assurez-vous de l'avoir généré avec train_model.py.")
+    raise Exception(f"Le fichier '{model_path}' est introuvable. Vérifiez le chemin et générez le modèle.")
 
 @app.get("/")
 def root():
@@ -27,6 +29,13 @@ def predict(features: dict):
     :return: Une prédiction basée sur les données fournies.
     """
     try:
+        # Vérifier que toutes les features requises sont présentes
+        required_features = ["longitude", "latitude", "housing_median_age", "total_rooms",
+                             "total_bedrooms", "population", "households", "median_income"]
+        for feature in required_features:
+            if feature not in features:
+                return {"error": f"Feature '{feature}' manquante dans les données fournies."}
+
         # Convertir les features en un tableau NumPy
         X = np.array([list(features.values())])
         # Effectuer la prédiction

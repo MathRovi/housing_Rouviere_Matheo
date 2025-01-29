@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Rouviere/Documents/IA-Institut/B2/CloudhousingS4/housing-model/mlruns/817329415073338012/054e60939f614067bb7e7a22b395a2cf/artifacts
+end_time: 1738148779123
+entry_point_name: ''
+experiment_id: '817329415073338012'
+lifecycle_stage: active
+run_id: 054e60939f614067bb7e7a22b395a2cf
+run_name: vaunted-owl-189
+run_uuid: 054e60939f614067bb7e7a22b395a2cf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738148775035
+status: 3
+tags: []
+user_id: Rouviere

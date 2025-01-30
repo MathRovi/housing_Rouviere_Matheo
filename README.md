@@ -1,82 +1,122 @@
 # Housing Prediction API - Projet de Matheo Rouvière
 
-# Description
-Ce projet implémente une API permettant de prédire la valeur médiane des maisons en fonction de diverses caractéristiques comme la localisation géographique, l'âge des maisons, le nombre de chambres, le revenu médian, etc. Le modèle utilisé pour faire ces prédictions est un modèle de régression linéaire, entraîné sur un jeu de données de logements. L'API est développée avec **FastAPI** et le modèle est créé avec **scikit-learn**.
+## Description
+Ce projet implémente une API permettant de prédire la valeur médiane des maisons en fonction de diverses caractéristiques comme la localisation géographique, l'âge des maisons, le nombre de chambres, le revenu médian, etc. Le modèle utilisé pour faire ces prédictions est un modèle de régression linéaire, entraîné sur un jeu de données de logements. L'API est développée avec FastAPI et le modèle est géré avec MLflow pour le suivi des expérimentations et le déploiement.
 
-# Prérequis
+---
 
-## Avant de commencer, assurez-vous d'avoir les outils suivants installés :
-
+## Prérequis
+Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 - **Python 3.11.9**
-- **Docker** 
+- **Docker**
 - **Git**
 
-# Installation
+---
 
-# 1. Cloner le projet
+## Installation
 
-## Clonez le projet depuis GitHub :
-
+### 1. Cloner le projet
+Clonez le projet depuis GitHub :
+```bash
 git clone https://github.com/MathRovi/housing_Rouviere_Matheo.git
-
 cd housing_Rouviere_Matheo
+```
 
-# Dans le dossier housing-model, créez un environnement virtuel pour installer les dépendances
+### 2. Installer les dépendances
 
+#### a. Créer un environnement virtuel (optionnel mais recommandé)
+Dans le dossier `housing-model`, créez un environnement virtuel :
+```bash
 cd housing-model
-
 python -m venv venv
+```
 
-# 2. Ensuite, activez l'environnement virtuel:
+#### b. Activer l'environnement virtuel
+- Pour **Windows** :
+  ```bash
+  venv\scripts\activate
+  ```
+- Pour **Linux/MacOS** :
+  ```bash
+  source venv/bin/activate
+  ```
 
-venv\scripts\activate (pour windows)
-
-source venv/bin/activate (pour linux, macOS)
-
-# 3. Installer les dépendances
-## Installez les dépendances nécessaires avec la commande suivante :
-
+#### c. Installer les dépendances Python
+Installez les dépendances nécessaires avec la commande suivante :
+```bash
 pip install -r requirements.txt
+```
 
-# 4. Entraîner le modèle
-## Dans le dossier housing-model, exécutez le script Python pour entraîner le modèle de régression linéaire :
-
+### 3. Entraîner le modèle
+Dans le dossier `housing-model`, exécutez le script Python pour entraîner le modèle de régression linéaire :
+```bash
 python train_model.py
+```
+Cela génère le modèle et le sauvegarde dans le fichier `model/model.pkl`.
 
-Cela génère le modèle et le sauvegarde dans le fichier model/model.pkl.
+---
 
-# Démarrer le projet
+## Étape 4 : Utilisation de MLflow pour le suivi des expérimentations et la gestion des modèles
 
-1. Démarrer l'API avec FastAPI
-## Allez dans le dossier housing-api et démarrez le serveur FastAPI avec la commande suivante :
+### Suivi des expérimentations
+1. **Installation de MLflow** :
+   Si ce n'est pas déjà fait, installez MLflow dans votre environnement avec la commande suivante :
+   ```bash
+   pip install mlflow
+   ```
 
-cd housing-api
+2. **Démarrer l'interface MLflow** :
+   Dans le dossier `housing-model`, démarrez le serveur MLflow :
+   ```bash
+   mlflow ui
+   ```
+   Cela ouvre une interface web accessible à l'adresse `http://localhost:5000`.
 
-uvicorn main:app --reload
+3. **Enregistrer les expérimentations** :
+   Pendant l'entraînement du modèle, les paramètres, métriques et artefacts sont automatiquement enregistrés dans MLflow grâce aux fonctions :
+   - `log_params` pour les hyperparamètres
+   - `log_metrics` pour les résultats d'évaluation
+   - `log_model` pour sauvegarder le modèle entraîné.
 
-## Cela démarre le serveur API à l'adresse http://localhost:8000.
+4. **Ajouter le modèle au registre de modèles** :
+   Une fois un modèle satisfaisant obtenu, vous pouvez l'ajouter au registre de modèles via l'interface MLflow ou via le script `promote_model.py`.
 
-# 2. Démarrer le projet avec Docker
+---
 
-## Si vous souhaitez exécuter le projet avec Docker, vous pouvez utiliser docker-compose.
+## Étape 5 : Déploiement avec MLflow Model Server
 
-## Construire les images Docker :
+### Création et déploiement
+1. **Créer une image Docker pour le modèle** :
+   Utilisez MLflow pour construire une image Docker pour le modèle. Dans le dossier `housing-model`, exécutez :
+   ```bash
+   mlflow models build-docker -m ./mlruns/<EXPERIMENT_ID>/<RUN_ID>/artifacts/model -n housing-model
+   ```
+   Cette commande crée une image Docker contenant une API REST pour le modèle.
 
-docker-compose build
+2. **Configurer `docker-compose`** :
+   La configuration de `docker-compose.yaml` a été mise à jour pour inclure le modèle MLflow en tant que service (`model-1`).
 
-# Démarrer les containers :
+3. **Démarrer les services Docker** :
+   - Construire les images Docker :
+     ```bash
+     docker-compose build
+     ```
+   - Démarrer les containers :
+     ```bash
+     docker-compose up
+     ```
+   L'API FastAPI est accessible sur `http://localhost:8000` et le modèle MLflow est disponible sur `http://localhost:8001`.
 
-docker-compose up
+---
 
-## Les services seront en cours d'exécution dans les containers Docker. L'API sera accessible via http://localhost:8000.
+## Utilisation de l'API
 
-# Utilisation de l'API
-## L'API expose un endpoint pour prédire la valeur médiane des maisons en fonction de plusieurs paramètres.
+### Endpoints principaux
+- **`POST /predict/`** : Prédire la valeur médiane des maisons.
 
-POST /predict/ : Prédire la valeur médiane des maisons en fonction des paramètres fournis.
-
-## Exemple de données sous le format JSON à envoyer :
-
+### Exemple de requête
+#### Requête JSON
+```json
 {
   "longitude": -122.23,
   "latitude": 37.88,
@@ -86,17 +126,36 @@ POST /predict/ : Prédire la valeur médiane des maisons en fonction des paramè
   "population": 322,
   "households": 126,
   "median_income": 8.3252,
-  "ocean_proximity_INLAND": 0,
-  "ocean_proximity_NEAR BAY": 1,
-  "ocean_proximity_NEAR OCEAN": 0,
-  "ocean_proximity_ISLAND": 0
+  "ocean_proximity_INLAND": false,
+  "ocean_proximity_NEAR BAY": true,
+  "ocean_proximity_NEAR OCEAN": false,
+  "ocean_proximity_ISLAND": false
 }
+```
 
-## Réponse attendue :
-
+#### Réponse attendue
+```json
 {
-  "prediction": 628725.5062235147
+  "predictions": [408839.7148844567]
 }
+```
 
-Des tests unitaires sont intégrés dans le projet pour tester l'API. Vous pouvez utiliser des outils Swagger UI pour tester les points de terminaison. 
-Swagger UI est accessible à l'adresse http://localhost:8000/docs.
+---
+
+## Tester l'API
+- **Swagger UI** : Utilisez Swagger UI pour explorer et tester les endpoints à l'adresse `http://localhost:8000/docs`.
+- **cURL** : Testez les prédictions via une requête POST comme suit :
+   ```bash
+   curl -X POST "http://localhost:8000/predict" -H "Content-Type: application/json" -d "{\"longitude\": -122.23, \"latitude\": 37.88, \"housing_median_age\": 41, \"total_rooms\": 880, \"total_bedrooms\": 129, \"population\": 322, \"households\": 126, \"median_income\": 8.3252, \"ocean_proximity_INLAND\": false, \"ocean_proximity_NEAR BAY\": true, \"ocean_proximity_NEAR OCEAN\": false, \"ocean_proximity_ISLAND\": false}"
+   ```
+
+---
+
+## Documentation supplémentaire
+- **MLflow** :
+  - [Getting Started](https://mlflow.org/docs/latest/getting-started/intro-quickstart/index.html)
+  - [Model Registry](https://mlflow.org/docs/latest/model-registry.html)
+- **Docker** :
+  - [Docker Compose](https://docs.docker.com/compose/)
+```
+

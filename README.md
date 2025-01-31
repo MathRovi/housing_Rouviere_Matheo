@@ -89,7 +89,7 @@ Cela génère le modèle et le sauvegarde dans le fichier `model/model.pkl`.
 1. **Créer une image Docker pour le modèle** :
    Utilisez MLflow pour construire une image Docker pour le modèle. Dans le dossier `housing-model`, exécutez :
    ```bash
-   mlflow models build-docker -m ./mlruns/<EXPERIMENT_ID>/<RUN_ID>/artifacts/model -n housing-model
+   mlflow models build-docker -m ./mlruns/817329415073338012/ef505ee1b5714854a79b4e489b4ad11d/artifacts/model -n housing-model
    ```
    Cette commande crée une image Docker contenant une API REST pour le modèle.
 

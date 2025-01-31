@@ -114,42 +114,22 @@ Cela génère le modèle et le sauvegarde dans le fichier `model/model.pkl`.
 ### Endpoints principaux
 - **`POST /predict/`** : Prédire la valeur médiane des maisons.
 
-### Exemple de requête
-#### Requête JSON
-```json
-{
-  "longitude": -122.23,
-  "latitude": 37.88,
-  "housing_median_age": 41.0,
-  "total_rooms": 880,
-  "total_bedrooms": 129,
-  "population": 322,
-  "households": 126,
-  "median_income": 8.3252,
-  "ocean_proximity_INLAND": false,
-  "ocean_proximity_NEAR BAY": true,
-  "ocean_proximity_NEAR OCEAN": false,
-  "ocean_proximity_ISLAND": false
-}
-```
+### Exemple de requête Curl pour recevoir une reponse valide de la part d'MLflow dans le cmd windows
+#### Requête
+curl -X POST http://127.0.0.1:8001/invocations -H "Content-Type: application/json" -d "{\"dataframe_records\": [{\"longitude\": -122.23, \"latitude\": 37.88, \"housing_median_age\": 41, \"total_rooms\": 880, \"total_bedrooms\": 129, \"population\": 322, \"households\": 126, \"median_income\": 8.3252, \"ocean_proximity_INLAND\": false, \"ocean_proximity_ISLAND\": false, \"ocean_proximity_NEAR BAY\": false, \"ocean_proximity_NEAR OCEAN\": false}]}"
 
 #### Réponse attendue
-```json
+{"predictions": [415072.13176069316]}
+
+### Commande pour tester FastApi dans le cmd Windows:
+curl -X POST http://127.0.0.1:8000/predict -H "Content-Type: application/json" -d "{\"inputs\": [[-122.23, 37.88, 41, 880, 129, 322, 126, 8.3252, 0, 0, 0, 0]]}"
+
+## Utilisez les fonctionnalités intégrées de FastAPI pour documenter l'API avec Swagger (accessible à http://127.0.0.1:8000/docs).
+### A insérer dans /predict
+
 {
-  "predictions": [408839.7148844567]
-}
-```
-
----
-
-## Tester l'API
-- **Swagger UI** : Utilisez Swagger UI pour explorer et tester les endpoints à l'adresse `http://localhost:8000/docs`.
-- **cURL** : Testez les prédictions via une requête POST comme suit :
-   ```bash
-   curl -X POST "http://localhost:8000/predict" -H "Content-Type: application/json" -d "{\"longitude\": -122.23, \"latitude\": 37.88, \"housing_median_age\": 41, \"total_rooms\": 880, \"total_bedrooms\": 129, \"population\": 322, \"households\": 126, \"median_income\": 8.3252, \"ocean_proximity_INLAND\": false, \"ocean_proximity_NEAR BAY\": true, \"ocean_proximity_NEAR OCEAN\": false, \"ocean_proximity_ISLAND\": false}"
-   ```
-
----
+  "inputs": [[-122.23, 37.88, 41, 880, 129, 322, 126, 8.3252, 0, 0, 0, 0]]
+} 
 
 ## Documentation supplémentaire
 - **MLflow** :

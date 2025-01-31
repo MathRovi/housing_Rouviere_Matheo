@@ -9,6 +9,8 @@ import os
 import pickle  # Ajout de l'importation du module pickle
 
 # Démarrer un run MLflow
+mlflow.set_tracking_uri("http://127.0.0.1:5000")
+
 mlflow.set_experiment("Improved Housing Price PredictionV2")
 
 with mlflow.start_run():

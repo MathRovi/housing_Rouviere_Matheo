@@ -1,3 +1,7 @@
+# Ignorer les répertoires MLflow
+mlruns/
+
+
 # Ignorer les fichiers de configuration des IDEs
 .vscode/
 .idea/

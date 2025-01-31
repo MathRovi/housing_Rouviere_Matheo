@@ -1,4 +1,3 @@
-version: "3.9"
 
 services:
   db:
@@ -21,21 +20,16 @@ services:
     restart: always
     depends_on:
       - db
-      - model
+      - mlflow-model
     ports:
       - "8000:8000"
 
-  model:
-    build:
-      context: ./housing-model
-    container_name: model-1
+  mlflow-model:
+    image: housing-mlflow-model:latest
+    container_name: mlflow-model-1
     restart: always
-    volumes:
-      - ./housing-model/mlruns:/app/mlruns
     ports:
       - "8001:8001"
-    environment:
-      MLFLOW_TRACKING_URI: "file:///app/mlruns"
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://127.0.0.1:8001/ping || exit 1"]
       interval: 30s

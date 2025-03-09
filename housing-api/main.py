@@ -49,7 +49,7 @@ def wait_for_db():
             print("Database is ready!")
             break
         except Exception as e:
-            print(f"Database not ready, waiting 1 second... {e}")
+            print(f"Database not ready, waiting 1 second... {repr(e)}")
             time.sleep(1)
 
 # Modèle Pydantic pour accepter les données de prédiction

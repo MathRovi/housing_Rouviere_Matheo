@@ -15,6 +15,10 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 
 ## Installation
 
+### Nettoyage des conteneurs inutilisés
+docker-compose down --remove-orphans
+docker-compose up -d --build
+
 ### 1. Cloner le projet
 Clonez le projet depuis GitHub :
 ```bash
@@ -110,6 +114,12 @@ Cela génère le modèle et le sauvegarde dans le fichier `model/model.pkl`.
 ---
 
 ## Etape 6 : 
+
+## Vérification des logs de Kafka
+docker ps
+
+Kafka doit etre healthy
+
 ### Topic Kafka
 docker exec -it kafka-broker /usr/bin/kafka-topics --bootstrap-server kafka-broker:9092 --list
 
@@ -117,7 +127,7 @@ docker exec -it kafka-broker /usr/bin/kafka-topics --bootstrap-server kafka-brok
 docker logs housing-consumer --follow
 
 ## Etape 7 : Envoi de messages (Producer)
-### Option A : via docker-compose run housing-producer
+### Via docker-compose run housing-producer
 
 docker-compose run housing-producer
 
@@ -147,6 +157,22 @@ curl -X POST http://127.0.0.1:8000/predict -H "Content-Type: application/json" -
 {
   "inputs": [[-122.23, 37.88, 41, 880, 129, 322, 126, 8.3252, 0, 0, 0, 0]]
 } 
+
+### Test final : pipeline de bout en bout
+##  Étape 1 : Vérifier MLflow
+curl -X POST http://127.0.0.1:8001/invocations -H "Content-Type: application/json" -d "{\"dataframe_split\": {\"columns\": [\"longitude\", \"latitude\", \"housing_median_age\", \"total_rooms\", \"total_bedrooms\", \"population\", \"households\", \"median_income\", \"ocean_proximity_INLAND\", \"ocean_proximity_ISLAND\", \"ocean_proximity_NEAR BAY\", \"ocean_proximity_NEAR OCEAN\"], \"data\": [[-118.44, 34.2, 36, 2698, 623, 1544, 554, 2.7375, 0, 0, 1, 0]]}}"
+
+## Étape 2 : Vérifier Kafka Producer
+docker-compose run housing-producer
+
+##  Étape 3 : Vérifier Kafka Consumer
+docker logs housing-consumer --follow
+
+## Étape 4 : Vérifier FastAPI
+curl -X GET http://127.0.0.1:8000/houses
+
+On voit normalement les maisons stockées
+
 
 ## Documentation supplémentaire
 - **MLflow** :

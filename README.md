@@ -109,6 +109,23 @@ Cela génère le modèle et le sauvegarde dans le fichier `model/model.pkl`.
 
 ---
 
+## Etape 6 : 
+### Topic Kafka
+docker exec -it kafka-broker /usr/bin/kafka-topics --bootstrap-server kafka-broker:9092 --list
+
+### Logs du consumer:
+docker logs housing-consumer --follow
+
+## Etape 7 : Envoi de messages (Producer)
+### Option A : via docker-compose run housing-producer
+
+docker-compose run housing-producer
+
+Cela envoie un fichier Json a housing_topic
+
+### Le consumer lira ce message et appellera POST /houses. Vérifie via :
+curl -X GET http://127.0.0.1:8000/houses
+
 ## Utilisation de l'API
 
 ### Endpoints principaux

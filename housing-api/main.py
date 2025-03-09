@@ -5,12 +5,12 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import requests
 import time
-from typing import List
+from typing import List, Optional
 
 # Initialisation de l'application FastAPI
 app = FastAPI()
 
-# Configuration de la base de données
+# Configuration de la base de données PostgreSQL
 DATABASE_URL = "postgresql://postgres:u6x5qhup@db/housing_db"
 
 # Connexion à PostgreSQL
@@ -52,24 +52,22 @@ def wait_for_db():
             print(f"Database not ready, waiting 1 second... {e}")
             time.sleep(1)
 
-# Modèle Pydantic pour accepter les données
+# Modèle Pydantic pour accepter les données de prédiction
 class ModelInput(BaseModel):
-    inputs: List[List[float]] = None
-    data: List[List[float]] = None
+    inputs: Optional[List[List[float]]] = None
+    data: Optional[List[List[float]]] = None
 
     def get_data(self) -> List[List[float]]:
         """
-        Méthode utilitaire pour extraire les données
-        depuis les champs `inputs` ou `data`.
+        Méthode pour extraire les données depuis `inputs` ou `data`.
         """
-        if self.inputs is not None:
+        if self.inputs:
             return self.inputs
-        elif self.data is not None:
+        elif self.data:
             return self.data
-        else:
-            raise ValueError("Aucune donnée valide trouvée dans les champs 'inputs' ou 'data'.")
+        raise ValueError("Aucune donnée valide trouvée dans les champs 'inputs' ou 'data'.")
 
-# Modèle Pydantic pour créer des maisons
+# Modèle Pydantic pour la création des maisons
 class HouseCreate(BaseModel):
     longitude: float
     latitude: float
@@ -113,23 +111,23 @@ def create_house(house: HouseCreate):
     finally:
         db.close()
 
-# Route GET pour tester la connexion avec le modèle MLflow
+# Route GET pour tester la connexion avec MLflow
 @app.get("/test_model_connection")
 def test_model_connection():
     model_url = "http://mlflow-model:8001/ping"
     try:
-        response = requests.get(model_url)
+        response = requests.get(model_url, timeout=5)
         response.raise_for_status()
         return {"message": "Connexion au modèle MLflow réussie", "status": response.text}
     except requests.exceptions.RequestException as e:
         raise HTTPException(status_code=500, detail=f"Erreur lors de la connexion au modèle MLflow : {e}")
 
+# Route POST pour la prédiction
 @app.post("/predict")
 def predict(input_data: ModelInput):
-    # URL du modèle MLflow
     model_url = "http://mlflow-model:8001/invocations"
 
-    # Préparer les données dans le format dataframe_records
+    # Vérification des données et conversion au format MLflow
     try:
         payload = {
             "dataframe_records": [
@@ -154,13 +152,11 @@ def predict(input_data: ModelInput):
         raise HTTPException(status_code=400, detail=str(e))
 
     try:
-        # Appel au modèle MLflow
-        response = requests.post(model_url, json=payload)
-        response.raise_for_status()  # Vérifie les erreurs HTTP
-        prediction = response.json()
-        return {"prediction": prediction}
+        # Appel à MLflow avec `Content-Type: application/json`
+        response = requests.post(
+            model_url, json=payload, headers={"Content-Type": "application/json"}
+        )
+        response.raise_for_status()
+        return {"prediction": response.json()}
     except requests.exceptions.RequestException as e:
-        raise HTTPException(status_code=500, detail=f"Error communicating with MLflow model: {e}")
-
-
-
+        raise HTTPException(status_code=500, detail=f"Erreur de communication avec MLflow : {e}")

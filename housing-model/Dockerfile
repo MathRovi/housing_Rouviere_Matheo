@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y \
 # Définir le répertoire de travail
 WORKDIR /app
 
-# Installer MLflow
-RUN pip install --no-cache-dir mlflow[extras] gunicorn
+# Installer MLflow avec les versions exactes pour éviter les conflits
+RUN pip install --no-cache-dir mlflow==2.20.0 numpy==2.2.2 scipy==1.15.1 gunicorn
 
 # Copier le répertoire des artefacts
 COPY ./mlruns /app/mlruns

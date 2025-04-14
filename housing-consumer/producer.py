@@ -2,7 +2,7 @@ from confluent_kafka import Producer
 import json
 import os
 
-BOOTSTRAP_SERVERS = os.getenv("BOOTSTRAP_SERVERS", "kafka-broker:9092")
+BOOTSTRAP_SERVERS = os.getenv("BOOTSTRAP_SERVERS", "localhost:29092")
 TOPIC_NAME = os.getenv("TOPIC_NAME", "housing_topic")
 
 p = Producer({'bootstrap.servers': BOOTSTRAP_SERVERS})
